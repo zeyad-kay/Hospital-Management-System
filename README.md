@@ -1,6 +1,6 @@
 ## Setup
 
-1. Install [python](https://www.python.org/downloads/windows/)
+1. Install [python](https://www.python.org/downloads)
 
 2. open the terminal and create a virtual environment
 
