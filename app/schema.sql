@@ -81,3 +81,6 @@ CREATE TABLE `admin` (
   `password` varchar(255),
   `gender` varchar(255)
 );
+
+
+INSERT INTO ADMIN (first_name,last_name,phone,username,password,gender) VALUES ('zee','kay',123,'zee@kay.com','zeekay','Male');
