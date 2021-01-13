@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block Nav %}
+<li class="nav-item">
+  <form action="/admin" method="post">
+    <button id="admins-btn" name="role" value="admins" type="submit"
+      class="nav-link btn btn-outline-light auth">Admins</button>
+  </form>
+</li>
+<li class="nav-item">
+  <form action="/admin" method="post">
+    <button id="patients-btn" type="submit" name="role" value="patients"
+      class="nav-link btn btn-outline-light auth">Patients</button>
+  </form>
+</li>
+<li class="nav-item">
+  <form action="/admin" method="post">
+    <button id="doctors-btn" class="nav-link btn btn-outline-light auth" name="role" value="doctors">Doctors</button>
+  </form>
+</li>
+<li class="nav-item">
+  <form action="/admin" method="post">
+    <button id="technicians-btn" class="nav-link btn btn-outline-light auth" name="role"
+      value="technicians">Technicians</button>
+  </form>
+</li>
+<li class="nav-item">
+  <a class="nav-link btn btn-outline-light auth" href="/admin/signup">Add User</a>
+</li>
+<li class="nav-item">
+  <a href="/admin/assignments" class="nav-link btn btn-outline-light auth" tabindex="-1" role="button"
+    aria-disabled="true">Assignments</a>
+</li>
+{% endblock %}
+
+{% block content %}
+
+<div class="position-relative m-5 text-white">
+  {% if role %}
+  <h1>{{role.upper()}}</h1>
+  <pre>
+        <br><br>
+        <table class="table table-dark">
+            <thead class="thead-light">
+                <tr>
+                    {% for key in dict(Entity[0]) %}
+                    <th scope="col">{{key.upper()}}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+            {% for row in Entity %}
+            <tr>
+                {% for key in dict(row) %}
+                <td>{{ row[key] }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</pre>
+  {% else %}
+  <h1>Welcome {{g.user["first_name"]}}</h1>
+  
+
+  <div class="container text-dark text-center stat-table">
+    <div class="row">
+
+      <div class="mb-3 mt-3 col-md-6 col-sm-12">
+        <div style="background: #d1ecf1;color: #35a4ba;" class="pb-3 card">
+          <div class="card-body">
+            <h5 class="card-title">Scans</h5>
+            <p class="card-text">{{stats['scans_count']}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3 mt-3 col-md-6 col-sm-12">
+        <div style="background: #d2f9ee;color: #38e1b0;" class="pb-3 card">
+          <div class="card-body">
+            <h5 class="card-title">Patients</h5>
+            <p class="card-text">{{stats['patients_count']}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-100"></div>
+
+      <div class="mb-3 mt-3 col-md-6 col-sm-12">
+        <div style="background: #d6d8d9;color: #3a3e41;" class="pb-3 card">
+          <div class="card-body">
+            <h5 class="card-title">Doctors</h5>
+            <p class="card-text">{{stats['doctors_count']}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="mb-3 mt-3 col-md-6 col-sm-12">
+        <div style="background: #fddcdf;color: #f65a6f;" class="pb-3 card">
+          <div class="card-body">
+            <h5 class="card-title">Technicians</h5>
+            <p class="card-text">{{stats['technicians_count']}}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  {% endif %}
+</div>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul style="color: white;">
+  {% for message in messages %}
+  <li>{{ message }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+{% endblock %}

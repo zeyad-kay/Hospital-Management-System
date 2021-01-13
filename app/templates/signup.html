@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="position-relative m-5 text-white">
+
+    <h1>welcome to sign up </h1>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <form action="/admin/signup" method="POST">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <input name="first-name" type="text" class="form-control " id="fname-input"
+                                placeholder="First name" required>
+                        </div>
+                        <div class="form-row col-md-6">
+                            <input name="last-name" type="text" class="form-control " id="lname-input"
+                                placeholder="Last name" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Phone</label>
+                        <input name="phone" type="number" class="form-control" placeholder="Phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Username</label>
+                        <input name="username" type="email" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" placeholder="Username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input name="password" type="password" class="form-control" placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Confirm Password</label>
+                        <input name="confirm-password" type="password" class="form-control"
+                            placeholder="Confirm Password" required>
+                    </div>
+                    <div>
+                        <label>Gender</label>
+                        <select name="gender" class="form-control" id="gender" placeholder="gender" required>
+                            </button>
+                            <option><button>Male</option>
+                            <option><button>Female</option>
+                        </select> <br>
+
+                        <div>
+                            <label>Role</label>
+                            <select name="role" class="form-control" id="role" placeholder="Role" required>
+                                </button>
+                                <option><button>Admin</option>
+                                <option><button>Doctor</option>
+                                <option><button>Patient</option>
+                                <option><button>Technician</option>
+                            </select>
+                        </div> <br>
+
+                        <div class="form-group" style="display: none;" id="birth-date">
+                            <label for="exampleInputPassword1">Birth Date</label>
+                            <input id="birth-date-input" name="birth-date" type="date" class="form-control"
+                                placeholder="Birth Date">
+                        </div>
+                        <div id="medical-history" style="display: none;" class="form-group">
+                            <label for="exampleInputPassword1">Medical History</label>
+                            <input id="medical-history-input" name="medical-history" type="text" class="form-control"
+                                placeholder="Medical History">
+                        </div>
+
+                        {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                        <ul style="color: white;">
+                            {% for message in messages %}
+                            <li>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        {% endwith %}
+                        <button type="submit" class="btn btn-dark">Signup</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div> <br><br>
+<script type="text/javascript">
+    // alert('asd');
+    const role = document.getElementById('role')
+    role.addEventListener('change', (e) => {
+        if (role.value === 'Patient') {
+
+            document.getElementById('medical-history').style.display = 'block';
+            document.getElementById('medical-history-input').required = true;
+
+            document.getElementById('birth-date').style.display = 'block';
+            document.getElementById('birth-date-input').required = true;
+
+        } else {
+            document.getElementById('medical-history').style.display = 'none';
+            document.getElementById('medical-history-input').required = false;
+
+            document.getElementById('birth-date').style.display = 'none';
+            document.getElementById('birth-date-input').required = false;
+        }
+    })
+</script>
+{% endblock %}

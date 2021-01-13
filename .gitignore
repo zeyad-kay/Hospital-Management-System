@@ -2,3 +2,4 @@ venv
 .vscode
 __pycache__
 instance
+client_secrets.json

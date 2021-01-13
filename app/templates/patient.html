@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+
+{% block Nav %}
+<li class="nav-item">
+  <form action="/patient" method="post">
+    <button name="type" value="scans" type="submit" class="nav-link btn btn-outline-light auth">Scans</a>
+  </form>
+</li>
+<li class="nav-item">
+  <form action="/patient" method="post">
+    <button id="treatments-btn" name="type" value="treatments" type="submit" class="nav-link btn btn-outline-light auth">Treatments</a>
+  </form>
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="position-relative m-5 text-white">
+  {% if Entity %}
+  <pre>
+  <h 1>{{type.upper()}}</h1>
+  <br><br>
+  <table class="table table-dark">
+    <thead class="thead-light">
+      <tr>
+        {% for key in dict(Entity[0]) %}
+        <th scope="col">{{key.upper()}}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in Entity %}
+      <tr>
+        {% for key in dict(row) %}
+        <td>{{ row[key] }}</td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</pre>
+{% else %}
+  <h1>Welcome {{g.user["first_name"]}}</h1>
+{% endif %}
+
+</div>
+{% endblock %}

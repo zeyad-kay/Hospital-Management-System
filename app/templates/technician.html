@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+
+
+{% block Nav %}
+<li class="nav-item">
+  <form action="/technician" method="post">
+    <button id="scans-btn" name="scans" value="scans" type="submit" class="nav-link btn btn-outline-light auth">Scans</button>
+  </form>
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="position-relative m-5 text-white">
+  {% if Entity %}
+  <h1>Scans</h1>
+  <pre>
+    <br><br>
+    <table class="table table-dark">
+      <thead class="thead-light">
+        <tr>
+          {% for key in dict(Entity[0]) %}
+          <th scope="col">{{key.upper()}}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in Entity %}
+        <tr>
+          {% for key in dict(row) %}
+          <td>{{ row[key] }}</td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</pre>
+  {% else %}
+  <div style="text-align: center;" class="container">
+    <form id="upload-form" enctype="multipart/form-data" action="/technician/upload" method="POST">
+      <div>
+        <label>Role</label>
+        <select name="scan-type" class="form-control" id="exampleFormControlSelect1" placeholder="position"
+            required>
+            <option>X-RAY</option>
+            <option>MRI</option>
+            <option>CAT</option>
+            <option>PET</option>
+        </select>
+    </div>
+    <br>
+      <div id="medical-history" class="form-group">
+        <label for="exampleInputPassword1">Technician ID</label>
+        <input name="technician-id" type="text" class="form-control" placeholder="Technician ID" required>
+      </div>
+      <div id="medical-history" class="form-group">
+        <label for="exampleInputPassword1">Patient ID</label>
+        <input name="patient-id" type="text" class="form-control" placeholder="Patient ID" required>
+      </div>
+      <div class="custom-file mt-4 mb-4">
+        <label class="custom-file-label" for="inputGroupFile03">Choose Scan</label>
+        <input name="file" type="file" class="custom-file-input" id="inputGroupFile03" aria-describedby="inputGroupFileAddon03"  >
+      </div>
+      <button type="submit" class="btn btn-dark">Upload</button>
+    </form>
+    <br><br>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul style="color: white;">
+      {% for message in messages %}
+      <p>{{ message }}</p>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    {% endif %}
+  </div>
+
+</div>
+{% endblock %}

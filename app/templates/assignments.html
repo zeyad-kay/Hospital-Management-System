@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block Nav %}
+<li class="nav-item">
+  <form action="/admin" method="post">
+    <button id="admins-btn" name="role" value="admins" type="submit"
+      class="nav-link btn btn-outline-light auth">Admins</button>
+  </form>
+</li>
+<li class="nav-item">
+  <form action="/admin" method="post">
+    <button id="patients-btn" type="submit" name="role" value="patients"
+      class="nav-link btn btn-outline-light auth">Patients</button>
+  </form>
+</li>
+<li class="nav-item">
+  <form action="/admin" method="post">
+    <button id="doctors-btn" class="nav-link btn btn-outline-light auth"
+     name="role" value="doctors">Doctors</button>
+  </form>
+</li>
+<li class="nav-item">
+  <form action="/admin" method="post">
+    <button id="technicians-btn" class="nav-link btn btn-outline-light auth" name="role"
+      value="technicians">Technicians</button>
+  </form>
+</li>
+<li class="nav-item">
+  <a class="nav-link btn btn-outline-light auth" href="/admin/signup">Add User</a>
+</li>
+<li class="nav-item">
+  <a href="/admin/assignments" class="nav-link btn btn-outline-light auth" tabindex="-1" role="button"
+    aria-disabled="true">Assignments</a>
+</li>
+{% endblock %}
+
+
+
+{% block content %}
+<div class="container">
+
+  <div class="col-md-6 offset-md-3 mt-5" >
+    
+    <form action="/admin/assignments" method="POST">
+      <div class="form-group">
+        <label for="doctor-id">Doctor ID</label>
+        <input id="doctor-id" name="doctor-id" type="text" class="form-control" placeholder="Doctor ID" required>
+      </div>
+      <div class="form-group">
+        <label for="patient-id">Patient ID</label>
+      <input id="patient-id" name="patient-id" type="text" class="form-control" placeholder="Patient ID" required>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-dark">Submit</button>
+  </form>
+  <br><br>
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <div class="container text-white">
+    <ul style="text-align: center;">
+      {% for message in messages %}
+      <p>{{ message }}</p>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+  </div>
+</div>
+</div>
+{% endblock %}

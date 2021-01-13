@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+
+
+{% block Nav %}
+<li class="nav-item">
+  <form action="/doctor" method="post">
+    <button id="patients-btn" type="submit" name="patients" value="patients"
+      class="nav-link btn btn-outline-light auth">Patients</button>
+  </form>
+</li>
+<li class="nav-item">
+  <a href="/doctor/events" class="nav-link btn btn-outline-light auth">Calendar</a>
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="position-relative m-5 text-white">
+  {% if Entity %}
+  <h1>Patients</h1>
+  <pre>
+      <br><br>
+      <table class="table table-dark">
+        <thead class="thead-light">
+          <tr>
+            {% for key in dict(Entity[0]) %}
+            <th scope="col">{{key.upper()}}</th>
+            {% endfor %}
+            <th scope="col">Submit</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in Entity %}
+          <tr>
+            <form action="/doctor/treatment" method="post">
+              {% for key in dict(row) %}
+                {% if key == "diagnosis" or key == "treatment" %}
+                  <td><input type="text" name="{{key}}" class="form-control" placeholder="{{key.upper()}}" required></td>
+                {% else %}
+                <td>{{ row[key] }}</td>
+                {% endif %}
+
+              {% endfor %}  
+              <td><button name='medical-check-id' value='{{row["id"]}}' type="submit" class="btn btn-dark">Send</button> </td>
+            </form>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </pre>
+  {% else %}
+  <h1>Welcome {{g.user["first_name"]}}</h1>
+  {% endif %}
+</div>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul style="color: white;">
+  {% for message in messages %}
+  <li>{{ message }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+{% endblock %}

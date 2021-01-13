@@ -1,0 +1,79 @@
+
+html{
+    overflow-x: hidden;
+    height: 100%;
+    
+}
+body{
+    overflow-x: hidden;
+    background-color: rgb(14, 32, 66);
+    height: 100%;
+    color: #fff;
+}
+h1{
+    color: #fff;
+    margin: 2rem auto;
+}
+label{
+    color: #fff;
+}
+.scan-image{
+    width: 100%;
+    margin: 0;
+}
+.navbar{
+    background-color: #343a40;
+}
+.nav-item{
+    margin: 20px;
+}
+.auth{
+    color: white !important;
+    width: 100%;
+}
+.auth:hover{
+    width: 100%;
+    color: #212529 !important;
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+}
+.links{
+    color: #3498db !important;
+}
+.links:hover{
+    text-decoration: none;
+    color: #FFFFFF !important;
+}
+.footer{
+    margin: 0;
+    text-align: center;
+    background-color: black;
+    color: #fff;
+    margin-top: 10rem;
+}
+i{
+    color: #fff;
+    width: 4rem;
+    height: 4rem;
+}
+
+.card{
+    font-size: 24px;
+}
+.stat-table{
+    box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
+    border-radius: 10px;
+}
+
+@media screen and (min-width: 1000px) {
+    /* .stat-card{
+        width: 15rem;
+        height: 10rem;
+        border-radius: 5px;
+        font-size: 14px;
+    }     */
+    /* h5{
+        margin-top: 2rem;
+        font-size: 20px;
+    } */
+  }
