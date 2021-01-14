@@ -17,18 +17,13 @@ import time
 bp = Blueprint('dashboard', __name__)
 
 
-def render_table(title,Entity):
-    
-    return
-
-
 @bp.route('/patient',methods=('GET', 'POST'))
 @login_required
 @patient_required
 def patient():
     type=None
     rows=None
-    
+
     if request.method == "POST":
         user_id = session.get("user_id")
         type = request.form['type']
@@ -56,6 +51,7 @@ def patient():
 @doctor_required
 def doctor():
     rows = None
+    role=None
     if request.method == 'POST':
         try:
             db = get_db()
@@ -67,11 +63,12 @@ def doctor():
             JOIN patient on medical_check.patient_id=patient.id
             WHERE doctor_id=? AND treatment IS NULL
             """,(doctor_id,)).fetchall()
+            role='PATIENTS'
         except Exception as e:
             print(e)
             flash(e)
 
-    return render_template('doctor.html',Entity=rows)
+    return render_template('doctor.html',role=role,Entity=rows)
 
 @bp.route('/doctor/treatment',methods=['POST'])
 @login_required
@@ -266,16 +263,19 @@ def assignments():
 @login_required
 @technician_required
 def technician():
+    type=None
+    rows=None
     if request.method == "POST":
         try:
             user_id = session.get("user_id")
             db = get_db()
             rows = db.execute('SELECT id,type,time FROM Scan WHERE technician_id=?',(user_id,)).fetchall()
             db.commit()
-            return render_template('technician.html', Entity=rows)
+            type='SCANS'
         except Exception as e:
             print(e)
-    return render_template('technician.html')
+            flash(e)
+    return render_template('technician.html',type=type, Entity=rows)
 
 
 

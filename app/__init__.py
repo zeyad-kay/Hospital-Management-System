@@ -1,7 +1,7 @@
 
 from app.db import get_db
 from flask.globals import request
-from flask.helpers import flash, url_for
+from flask.helpers import flash
 import os
 from flask import Flask,render_template
 

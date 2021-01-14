@@ -12,8 +12,9 @@
 
 {% block content %}
 <div class="position-relative m-5 text-white">
-  {% if Entity %}
+  {% if type %}
   <h1>Scans</h1>
+  {% if Entity[0] %}
   <pre>
     <br><br>
     <table class="table table-dark">
@@ -34,7 +35,8 @@
         {% endfor %}
       </tbody>
     </table>
-</pre>
+  </pre>
+  {% endif %}
   {% else %}
   <div style="text-align: center;" class="container">
     <form id="upload-form" enctype="multipart/form-data" action="/technician/upload" method="POST">

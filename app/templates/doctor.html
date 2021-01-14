@@ -16,8 +16,9 @@
 
 {% block content %}
 <div class="position-relative m-5 text-white">
-  {% if Entity %}
-  <h1>Patients</h1>
+  {% if role %}
+  <h1>{{role.upper()}}</h1>
+  {% if Entity[0] %}
   <pre>
       <br><br>
       <table class="table table-dark">
@@ -48,6 +49,7 @@
         </tbody>
       </table>
     </pre>
+    {% endif %}
   {% else %}
   <h1>Welcome {{g.user["first_name"]}}</h1>
   {% endif %}
