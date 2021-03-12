@@ -1,3 +1,7 @@
+## Introduction
+
+This web app is a Hospital Information System designed to manage the hospital's daily routines in the Radiology department. It makes it easy for Admins to onboard doctors, patients and technicians. Doctors can see their appointments, sync with their calendars and prescribe treatment for patients. Technicians can upload scan files to the database and patients can see their scans and messages sent from their doctor. 
+
 ## Setup
 
 1. Install [python](https://www.python.org/downloads)
